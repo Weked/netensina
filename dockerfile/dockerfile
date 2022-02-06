@@ -1,0 +1,14 @@
+FROM ubuntu:18.04
+LABEL maintainer 'Weked A. Curvel <weked.curvel@gmail.com>'
+#Camada com os recursos comuns a todos os containeres.
+#criando o workdir que ira conter o arquivos a serem compartilhados com o host.
+RUN mkdir netensina && \
+#efetuando o update da imagem.
+    apt-get -y update && \
+#instaladno os recursos de rede comuns a todos os containeres.
+    apt-get install -y net-tools iputils-ping tcpdump iproute2 netcat dnsutils curl iptables nmap && \
+#Definindo a camada personalizada do equipamento a ser emulado,
+#contem ferramentas direcionadas à uma tarefa específica.
+    apt-get install -y bridge-utils network-manager
+#definindo o workdir
+WORKDIR /netensina
